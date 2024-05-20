@@ -20,7 +20,7 @@ export default function MyPieChart({ data }) {
       },
       title: {
         display: true,
-        text: "Pie Chart",
+        text: "Measures per country - Pie View",
       },
     },
   };

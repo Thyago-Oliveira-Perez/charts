@@ -20,7 +20,7 @@ export default function DoughnutChart({ data }) {
       },
       title: {
         display: true,
-        text: "Doughnut Chart",
+        text: "Measures per protocol",
       },
     },
   };

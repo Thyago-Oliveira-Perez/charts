@@ -28,7 +28,7 @@ export default function BarChart({ data }) {
       },
       title: {
         display: true,
-        text: "Bar Chart",
+        text: "Measures per country",
       },
     },
   };

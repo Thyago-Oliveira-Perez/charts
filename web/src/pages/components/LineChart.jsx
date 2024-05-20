@@ -30,7 +30,7 @@ export default function LineChart({ data }) {
       },
       title: {
         display: true,
-        text: "Line Chart",
+        text: "Measures per time",
       },
     },
   };
