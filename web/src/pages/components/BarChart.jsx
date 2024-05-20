@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-export default function BarChart({ data }) {
+export default function BarChart({ data, onUpdate }) {
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -37,5 +37,12 @@ export default function BarChart({ data }) {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <div>
+      <Bar data={data} options={options} />
+      <button className="reload-button" onClick={onUpdate}>
+        Update Bar Chart
+      </button>
+    </div>
+  );
 }

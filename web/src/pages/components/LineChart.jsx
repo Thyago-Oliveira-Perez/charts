@@ -21,7 +21,7 @@ ChartJS.register(
   Legend
 );
 
-export default function LineChart({ data }) {
+export default function LineChart({ data, onUpdate }) {
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -39,5 +39,12 @@ export default function LineChart({ data }) {
     },
   };
 
-  return <Line id={1} data={data} options={options} />;
+  return (
+    <div>
+      <Line id={1} data={data} options={options} />
+      <button className="reload-button" onClick={onUpdate}>
+        Update Line Chart
+      </button>
+    </div>
+  );
 }

@@ -11,7 +11,7 @@ import {
 
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
-export default function DoughnutChart({ data }) {
+export default function DoughnutChart({ data, onUpdate }) {
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -29,5 +29,12 @@ export default function DoughnutChart({ data }) {
     },
   };
 
-  return <Doughnut data={data} options={options} />;
+  return (
+    <div>
+      <Doughnut data={data} options={options} />
+      <button className="reload-button" onClick={onUpdate}>
+        Update Doughnut Chart
+      </button>
+    </div>
+  );
 }

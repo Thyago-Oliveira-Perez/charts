@@ -11,7 +11,7 @@ import {
 
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
-export default function MyPieChart({ data }) {
+export default function MyPieChart({ data, onUpdate }) {
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -29,5 +29,12 @@ export default function MyPieChart({ data }) {
     },
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div>
+      <Pie data={data} options={options} />
+      <button className="reload-button" onClick={onUpdate}>
+        Update Pie Chart
+      </button>
+    </div>
+  );
 }

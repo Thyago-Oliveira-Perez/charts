@@ -36,7 +36,7 @@ function HomeContent() {
           ) : lineData.error ? (
             <div>Error: {lineData.error}</div>
           ) : (
-            <LineChart data={lineData.data} />
+            <LineChart data={lineData.data} onUpdate={fetchLineData} />
           )}
         </div>
         <div className="chart-item">
@@ -46,7 +46,7 @@ function HomeContent() {
           ) : barData.error ? (
             <div>Error: {barData.error}</div>
           ) : (
-            <BarChart data={barData.data} />
+            <BarChart data={barData.data} onUpdate={fetchBarData} />
           )}
         </div>
         <div className="chart-item">
@@ -56,7 +56,10 @@ function HomeContent() {
           ) : doughnutData.error ? (
             <div>Error: {doughnutData.error}</div>
           ) : (
-            <DoughnutChart data={doughnutData.data} />
+            <DoughnutChart
+              data={doughnutData.data}
+              onUpdate={fetchDoughnutData}
+            />
           )}
         </div>
         <div className="chart-item">
@@ -66,7 +69,7 @@ function HomeContent() {
           ) : pieData.error ? (
             <div>Error: {pieData.error}</div>
           ) : (
-            <PieChart data={pieData.data} />
+            <PieChart data={pieData.data} onUpdate={fetchPieData} />
           )}
         </div>
       </div>
