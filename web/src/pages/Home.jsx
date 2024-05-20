@@ -9,15 +9,27 @@ import Api from "./../api/api";
 import "./Home.css";
 
 export default function HomePage() {
-  const [lineData, setLineData] = useState([65, 59, 80, 81, 56, 55, 40]);
+  const [lineData, setLineData] = useState(null);
   const [barData, setBarData] = useState(null);
-  const [doughnutData, setDoughnutData] = useState([300, 50, 100]);
-  const [pirData, setPirData] = useState([300, 50, 100]);
+  const [doughnutData, setDoughnutData] = useState(null);
+  const [pirData, setPirData] = useState(null);
   const api = new Api();
 
   useEffect(() => {
+    api.get("line-chart").then((res) => {
+      setLineData(res.data);
+    });
+
     api.get("bar-chart").then((res) => {
       setBarData(res.data);
+    });
+
+    api.get("doughnut-chart").then((res) => {
+      setDoughnutData(res.data);
+    });
+
+    api.get("pie-chart").then((res) => {
+      setPirData(res.data);
     });
   }, []);
 
@@ -27,7 +39,13 @@ export default function HomePage() {
       <div className="chart-grid">
         <div className="chart-item">
           <h2>Line Chart</h2>
-          <LineChart info={lineData} />
+          {!lineData ? (
+            <Loading />
+          ) : (
+            <>
+              <LineChart info={lineData} />
+            </>
+          )}
         </div>
         <div className="chart-item">
           <h2>Bar Chart</h2>
@@ -41,11 +59,23 @@ export default function HomePage() {
         </div>
         <div className="chart-item">
           <h2>Doughnut Chart</h2>
-          <DoughnutChart info={doughnutData} />
+          {!doughnutData ? (
+            <Loading />
+          ) : (
+            <>
+              <DoughnutChart info={doughnutData} />
+            </>
+          )}
         </div>
         <div className="chart-item">
           <h2>Pie Chart</h2>
-          <PieChart info={pirData} />
+          {!pirData ? (
+            <Loading />
+          ) : (
+            <>
+              <PieChart info={pirData} />
+            </>
+          )}
         </div>
       </div>
     </div>
