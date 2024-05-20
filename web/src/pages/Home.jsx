@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import LineChart from "../components/LineChart";
-import BarChart from "../components/BarChart";
-import DoughnutChart from "../components/DoughnutChart";
-import PieChart from "../components/PieChart";
-import Loading from "../components/Loading/Loading";
+import LineChart from "./components/LineChart";
+import BarChart from "./components/BarChart";
+import DoughnutChart from "./components/DoughnutChart";
+import PieChart from "./components/PieChart";
+import Loading from "./components/Loading/Loading";
 import Api from "./../api/api";
 import "./Home.css";
 
