@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class Api {
-  url = import.meta.env.VITE_API;
+  url = import.meta.env.VITE_API_URL;
 
   axiosClient = axios.create({
     baseURL: this.url,

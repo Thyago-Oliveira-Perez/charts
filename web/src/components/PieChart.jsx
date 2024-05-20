@@ -11,7 +11,7 @@ import {
 
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
-export default function MyPieChart() {
+export default function MyPieChart({ info }) {
   const data = {
     labels: ["Red", "Blue", "Yellow"],
     datasets: [
@@ -27,7 +27,7 @@ export default function MyPieChart() {
           "rgba(54,162,235,1)",
           "rgba(255,206,86,1)",
         ],
-        data: [300, 50, 100],
+        data: info,
       },
     ],
   };
@@ -40,7 +40,7 @@ export default function MyPieChart() {
       },
       title: {
         display: true,
-        text: "Chart.js Pie Chart",
+        text: "Pie Chart",
       },
     },
   };

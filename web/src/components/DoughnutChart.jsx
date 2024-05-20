@@ -11,7 +11,7 @@ import {
 
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
-export default function DoughnutChart() {
+export default function DoughnutChart({ info }) {
   const data = {
     labels: ["Red", "Blue", "Yellow"],
     datasets: [
@@ -27,7 +27,7 @@ export default function DoughnutChart() {
           "rgba(54,162,235,1)",
           "rgba(255,206,86,1)",
         ],
-        data: [300, 50, 100],
+        data: info,
       },
     ],
   };
@@ -40,7 +40,7 @@ export default function DoughnutChart() {
       },
       title: {
         display: true,
-        text: "Chart.js Doughnut Chart",
+        text: "Doughnut Chart",
       },
     },
   };
