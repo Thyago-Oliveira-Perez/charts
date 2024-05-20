@@ -21,19 +21,7 @@ ChartJS.register(
   Legend
 );
 
-export default function LineChart({ info }) {
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Line",
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
-        data: info,
-      },
-    ],
-  };
-
+export default function LineChart({ data }) {
   const options = {
     responsive: true,
     plugins: {

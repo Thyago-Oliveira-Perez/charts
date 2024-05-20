@@ -20,6 +20,48 @@ app.get("/infos", (req, res) => {
     });
 });
 
+app.get("/line-chart", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const dataSet = [];
+
+  fs.createReadStream("./database/CloudWatch_Traffic_Web_Attack.csv")
+    .pipe(csv())
+    .on("data", (data) => {
+      dataSet.push(data);
+    })
+    .on("end", () => {
+      const data = new Map();
+
+      dataSet.forEach((info) => {
+        if (data.has(info["time"])) {
+          data.set(info["time"], data.get(info["time"]) + 1);
+        } else {
+          data.set(info["time"], 1);
+        }
+      });
+
+      const labels = [];
+      const resData = [];
+
+      data.forEach((value, key) => {
+        resData.push(value);
+        labels.push(key);
+      });
+
+      res.json({
+        labels,
+        datasets: [
+          {
+            label: "Measures per time",
+            backgroundColor: "rgba(75,192,192,0.2)",
+            borderColor: "rgba(75,192,192,1)",
+            data: resData,
+          },
+        ],
+      });
+    });
+});
+
 app.get("/bar-chart", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   const dataSet = [];

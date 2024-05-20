@@ -43,7 +43,7 @@ export default function HomePage() {
             <Loading />
           ) : (
             <>
-              <LineChart info={lineData} />
+              <LineChart data={lineData} />
             </>
           )}
         </div>
