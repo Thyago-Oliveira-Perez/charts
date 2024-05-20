@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import Api from "./api/api";
+import "./App.css";
+import LineChart from "./components/LineChart";
+import BarChart from "./components/BarChart";
+import DoughnutChart from "./components/DoughnutChart";
+import PieChart from "./components/PieChart";
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -12,13 +17,26 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ border: "2px solid red" }}>
+    <div>
       <h1>Cyber Security Charts</h1>
-      <ul>
-        {data.map((d, i) => (
-          <li key={i}>{d.dst_ip}</li>
-        ))}
-      </ul>
+      <div className="chart-grid">
+        <div className="chart-item">
+          <h2>Line Chart</h2>
+          <LineChart />
+        </div>
+        <div className="chart-item">
+          <h2>Bar Chart</h2>
+          <BarChart />
+        </div>
+        <div className="chart-item">
+          <h2>Doughnut Chart</h2>
+          <DoughnutChart />
+        </div>
+        <div className="chart-item">
+          <h2>Pie Chart</h2>
+          <PieChart />
+        </div>
+      </div>
     </div>
   );
 }
