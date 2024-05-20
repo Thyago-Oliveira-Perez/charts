@@ -8,10 +8,13 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import Loading from "./Loading/Loading";
 
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
-export default function MyPieChart({ data, onUpdate }) {
+export default function MyPieChart({ pieData, onUpdate }) {
+  const { data, loading, error } = pieData;
+
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -29,12 +32,24 @@ export default function MyPieChart({ data, onUpdate }) {
     },
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
+      <div className="chart-header">
+        <h2>Pie Chart</h2>
+        <button className="reload-button" onClick={onUpdate}>
+          Update Pie Chart
+        </button>
+      </div>
+
       <Pie data={data} options={options} />
-      <button className="reload-button" onClick={onUpdate}>
-        Update Pie Chart
-      </button>
     </div>
   );
 }

@@ -30,47 +30,19 @@ function HomeContent() {
       <h1>Cyber Security Charts</h1>
       <div className="chart-grid">
         <div className="chart-item">
-          <h2>Line Chart</h2>
-          {lineData.loading ? (
-            <Loading />
-          ) : lineData.error ? (
-            <div>Error: {lineData.error}</div>
-          ) : (
-            <LineChart data={lineData.data} onUpdate={fetchLineData} />
-          )}
+          <LineChart lineData={lineData} onUpdate={fetchLineData} />
         </div>
         <div className="chart-item">
-          <h2>Bar Chart</h2>
-          {barData.loading ? (
-            <Loading />
-          ) : barData.error ? (
-            <div>Error: {barData.error}</div>
-          ) : (
-            <BarChart data={barData.data} onUpdate={fetchBarData} />
-          )}
+          <BarChart barData={barData} onUpdate={fetchBarData} />
         </div>
         <div className="chart-item">
-          <h2>Doughnut Chart</h2>
-          {doughnutData.loading ? (
-            <Loading />
-          ) : doughnutData.error ? (
-            <div>Error: {doughnutData.error}</div>
-          ) : (
-            <DoughnutChart
-              data={doughnutData.data}
-              onUpdate={fetchDoughnutData}
-            />
-          )}
+          <DoughnutChart
+            doughnutData={doughnutData}
+            onUpdate={fetchDoughnutData}
+          />
         </div>
         <div className="chart-item">
-          <h2>Pie Chart</h2>
-          {pieData.loading ? (
-            <Loading />
-          ) : pieData.error ? (
-            <div>Error: {pieData.error}</div>
-          ) : (
-            <PieChart data={pieData.data} onUpdate={fetchPieData} />
-          )}
+          <PieChart pieData={pieData} onUpdate={fetchPieData} />
         </div>
       </div>
     </div>

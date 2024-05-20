@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import Loading from "./Loading/Loading";
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +20,9 @@ ChartJS.register(
   Legend
 );
 
-export default function BarChart({ data, onUpdate }) {
+export default function BarChart({ barData, onUpdate }) {
+  const { data, loading, error } = barData;
+
   if (!data || !data.labels) {
     return <div>No data available</div>;
   }
@@ -37,12 +40,24 @@ export default function BarChart({ data, onUpdate }) {
     },
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
+      <div className="chart-header">
+        <h2>Bar Chart</h2>
+        <button className="reload-button" onClick={onUpdate}>
+          Update Bar Chart
+        </button>
+      </div>
+
       <Bar data={data} options={options} />
-      <button className="reload-button" onClick={onUpdate}>
-        Update Bar Chart
-      </button>
     </div>
   );
 }

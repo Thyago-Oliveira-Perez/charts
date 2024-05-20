@@ -5,6 +5,13 @@
   justify-content: center;
 }
 
+.chart-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
