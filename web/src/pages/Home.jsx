@@ -73,7 +73,7 @@ export default function HomePage() {
             <Loading />
           ) : (
             <>
-              <PieChart info={pirData} />
+              <PieChart data={pirData} />
             </>
           )}
         </div>

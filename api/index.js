@@ -157,6 +157,59 @@ app.get("/doughnut-chart", (req, res) => {
     });
 });
 
+app.get("/pie-chart", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  const dataSet = [];
+
+  fs.createReadStream("./database/CloudWatch_Traffic_Web_Attack.csv")
+    .pipe(csv())
+    .on("data", (data) => {
+      dataSet.push(data);
+    })
+    .on("end", () => {
+      const data = new Map();
+
+      dataSet.forEach((info) => {
+        if (data.has(info["src_ip_country_code"])) {
+          data.set(
+            info["src_ip_country_code"],
+            data.get(info["src_ip_country_code"]) + 1
+          );
+        } else {
+          data.set(info["src_ip_country_code"], 1);
+        }
+      });
+
+      const labels = [];
+      const resData = [];
+
+      data.forEach((value, key) => {
+        resData.push(value);
+        labels.push(key);
+      });
+
+      res.json({
+        labels,
+        datasets: [
+          {
+            label: "Measures per country",
+            backgroundColor: [
+              "rgba(255,99,132,0.2)",
+              "rgba(54,162,235,0.2)",
+              "rgba(255,206,86,0.2)",
+            ],
+            borderColor: [
+              "rgba(255,99,132,1)",
+              "rgba(54,162,235,1)",
+              "rgba(255,206,86,1)",
+            ],
+            data: resData,
+          },
+        ],
+      });
+    });
+});
+
 app.use(cors());
 
 app.listen(PORT, () =>
