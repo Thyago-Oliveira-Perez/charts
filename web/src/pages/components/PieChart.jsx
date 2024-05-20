@@ -12,6 +12,10 @@ import {
 ChartJS.register(CategoryScale, ArcElement, Title, Tooltip, Legend);
 
 export default function MyPieChart({ data }) {
+  if (!data || !data.labels) {
+    return <div>No data available</div>;
+  }
+
   const options = {
     responsive: true,
     plugins: {

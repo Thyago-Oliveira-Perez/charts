@@ -1,37 +1,29 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import LineChart from "./components/LineChart";
 import BarChart from "./components/BarChart";
 import DoughnutChart from "./components/DoughnutChart";
 import PieChart from "./components/PieChart";
 import Loading from "./components/Loading/Loading";
-import Api from "./../api/api";
+import { ChartProvider, Context } from "../context/Context";
 import "./Home.css";
 
-export default function HomePage() {
-  const [lineData, setLineData] = useState(null);
-  const [barData, setBarData] = useState(null);
-  const [doughnutData, setDoughnutData] = useState(null);
-  const [pirData, setPirData] = useState(null);
-  const api = new Api();
+function HomeContent() {
+  const {
+    state,
+    fetchLineData,
+    fetchBarData,
+    fetchDoughnutData,
+    fetchPieData,
+  } = useContext(Context);
 
   useEffect(() => {
-    api.get("line-chart").then((res) => {
-      setLineData(res.data);
-    });
-
-    api.get("bar-chart").then((res) => {
-      setBarData(res.data);
-    });
-
-    api.get("doughnut-chart").then((res) => {
-      setDoughnutData(res.data);
-    });
-
-    api.get("pie-chart").then((res) => {
-      setPirData(res.data);
-    });
+    fetchLineData();
+    fetchBarData();
+    fetchDoughnutData();
+    fetchPieData();
   }, []);
+
+  const { lineData, barData, doughnutData, pieData } = state;
 
   return (
     <div className="container">
@@ -39,45 +31,53 @@ export default function HomePage() {
       <div className="chart-grid">
         <div className="chart-item">
           <h2>Line Chart</h2>
-          {!lineData ? (
+          {lineData.loading ? (
             <Loading />
+          ) : lineData.error ? (
+            <div>Error: {lineData.error}</div>
           ) : (
-            <>
-              <LineChart data={lineData} />
-            </>
+            <LineChart data={lineData.data} />
           )}
         </div>
         <div className="chart-item">
           <h2>Bar Chart</h2>
-          {!barData ? (
+          {barData.loading ? (
             <Loading />
+          ) : barData.error ? (
+            <div>Error: {barData.error}</div>
           ) : (
-            <>
-              <BarChart data={barData} />
-            </>
+            <BarChart data={barData.data} />
           )}
         </div>
         <div className="chart-item">
           <h2>Doughnut Chart</h2>
-          {!doughnutData ? (
+          {doughnutData.loading ? (
             <Loading />
+          ) : doughnutData.error ? (
+            <div>Error: {doughnutData.error}</div>
           ) : (
-            <>
-              <DoughnutChart data={doughnutData} />
-            </>
+            <DoughnutChart data={doughnutData.data} />
           )}
         </div>
         <div className="chart-item">
           <h2>Pie Chart</h2>
-          {!pirData ? (
+          {pieData.loading ? (
             <Loading />
+          ) : pieData.error ? (
+            <div>Error: {pieData.error}</div>
           ) : (
-            <>
-              <PieChart data={pirData} />
-            </>
+            <PieChart data={pieData.data} />
           )}
         </div>
       </div>
     </div>
   );
 }
+
+const HomePage = () => (
+  <ChartProvider>
+    <HomeContent />
+  </ChartProvider>
+);
+
+export default HomePage;

@@ -20,6 +20,10 @@ ChartJS.register(
 );
 
 export default function BarChart({ data }) {
+  if (!data || !data.labels) {
+    return <div>No data available</div>;
+  }
+
   const options = {
     responsive: true,
     plugins: {
