@@ -63,7 +63,7 @@ export default function HomePage() {
             <Loading />
           ) : (
             <>
-              <DoughnutChart info={doughnutData} />
+              <DoughnutChart data={doughnutData} />
             </>
           )}
         </div>
